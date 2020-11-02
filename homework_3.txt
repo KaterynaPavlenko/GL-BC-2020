@@ -1,0 +1,69 @@
+Step 1
+kate@kate-VirtualBox ~> mkdir -p ~/f1/f2/f3/f4/f5/f6
+kate@kate-VirtualBox ~> cd ~/f1
+kate@kate-VirtualBox ~/f1> echo "New file" > NewFile.txt
+kate@kate-VirtualBox ~/f1> ls
+f2/  NewFile.txt 
+kate@kate-VirtualBox ~/f1> cp NewFile.txt ~/f1/f2/f3/f4/f5/f6
+kate@kate-VirtualBox ~/f1> cd ~/f1/f2/f3/f4/f5/f6/
+kate@kate-VirtualBox ~/f/f/f/f/f/f6> ls
+NewFile.txt
+kate@kate-VirtualBox ~/f/f/f/f/f/f6> cd
+kate@kate-VirtualBox ~> cd ~/f1
+kate@kate-VirtualBox ~/f1> rm NewFile.txt
+kate@kate-VirtualBox ~/f1> ls
+f2/
+
+
+Step 2,3
+kate@kate-VirtualBox ~/f1> ls f2 file
+ls: cannot access 'file': No such file or directory
+f2:
+f3/
+kate@kate-VirtualBox ~/f1 [2]> ls f2 file 2>error.log
+f2:
+f3/
+kate@kate-VirtualBox ~/f1 [2]> cat error.log 
+ls: cannot access 'file': No such file or directory
+kate@kate-VirtualBox ~/f1> ls f2 file > test.log 2>&1
+kate@kate-VirtualBox ~/f1 [2]> cat test.log
+ls: cannot access 'file': No such file or directory
+f2:
+f3
+
+
+Step 4
+kate@kate-VirtualBox ~/f1> echo "New file" > homework_step4.txt
+kate@kate-VirtualBox ~/f1 [1]> sudo chown root homework_step4.txt 
+[sudo] password for kate: 
+kate@kate-VirtualBox ~/f1> ls -l
+total 20
+-rw-rw-r-- 1 kate kate   52 лис  3 00:04 error.log
+drwxrwxr-x 3 kate kate 4096 лис  2 22:00 f2/
+-rw-rw-r-- 1 kate kate  923 лис  3 00:07 homework_3.txt
+-rw-rw-r-- 1 root kate    9 лис  3 00:57 homework_step4.txt
+-rw-rw-r-- 1 kate kate   59 лис  3 00:06 test.log
+kate@kate-VirtualBox ~/f1> sudo chmod +x homework_step4.txt 
+kate@kate-VirtualBox ~/f1> ls -l
+total 20
+-rw-rw-r-- 1 kate kate   52 лис  3 00:04 error.log
+drwxrwxr-x 3 kate kate 4096 лис  2 22:00 f2/
+-rw-rw-r-- 1 kate kate  923 лис  3 00:07 homework_3.txt
+-rwxrwxr-x 1 root kate    9 лис  3 00:57 homework_step4.txt*
+-rw-rw-r-- 1 kate kate   59 лис  3 00:06 test.log
+kate@kate-VirtualBox ~/f1> 
+
+
+Step 5,6
+ate@kate-VirtualBox ~/f1> cat file  || cat homework_step4.txt 
+cat: file: No such file or directory
+New file
+kate@kate-VirtualBox ~/f1> cat file && ls
+cat: file: No such file or directory
+
+
+Step 7
+kate@kate-VirtualBox ~/f1 [1]> echo "pwd"> prints.sh
+kate@kate-VirtualBox ~/f1> sh prints.sh 
+/home/kate/f1
+
