@@ -1,0 +1,89 @@
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> git branch hotfix
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> git checkout hotfix
+Switched to branch 'hotfix'
+kate@kate-VirtualBox ~/GL-BC-2020 (hotfix)> touch merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (hotfix)> vim merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (hotfix)> git add .
+kate@kate-VirtualBox ~/GL-BC-2020 (hotfix)> 
+git commit -m "added merge_conflict"
+[hotfix f5514bd] added merge_conflict
+ 1 file changed, 1 insertion(+)
+ create mode 100644 merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (hotfix)> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> touch merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> vim merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> git add .
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> git commit -m "added merge_conflict"
+[main 532ec91] added merge_conflict
+ 1 file changed, 1 insertion(+)
+ create mode 100644 merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> 
+git log --oneline  --decorate --graph --all
+* 532ec91 (HEAD -> main) added merge_conflict
+| * f5514bd (hotfix) added merge_conflict
+|/  
+| *   8d594ca (new_branch) modified README
+| |\  
+| | * 8711387 (origin/new_branch2, new_branch2) remove NewFile
+| | * e77263a add new file
+| |/  
+|/|   
+| * 7362e2d (origin/new_branch) modified README
+|/  
+* bd7b4ad (origin/main, origin/HEAD) Initial commit
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> git merge hotfix
+CONFLICT (add/add): Merge conflict in merge_conflict
+Auto-merging merge_conflict
+Automatic merge failed; fix conflicts and then commit the result.
+kate@kate-VirtualBox ~/GL-BC-2020 (main|MERGING) [1]> cat merge_conflict
+<<<<<<< HEAD
+text main
+=======
+text hotfix
+>>>>>>> hotfix
+kate@kate-VirtualBox ~/GL-BC-2020 (main|MERGING)> vim merge_conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (main|MERGING)> git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both added:      merge_conflict
+
+no changes added to commit (use "git add" and/or "git commit -a")
+kate@kate-VirtualBox ~/GL-BC-2020 (main|MERGING)>  git add merge_conflict 
+kate@kate-VirtualBox ~/GL-BC-2020 (main|MERGING)> git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+
+kate@kate-VirtualBox ~/GL-BC-2020 (main|MERGING)> 
+git commit -m "fix  merge conflict"
+[main 4a28da9] fix  merge conflict
+kate@kate-VirtualBox ~/GL-BC-2020 (main)> 
+git log --oneline  --decorate --graph --all
+*   4a28da9 (HEAD -> main) fix  merge conflict
+|\  
+| * f5514bd (hotfix) added merge_conflict
+* | 532ec91 added merge_conflict
+|/  
+| *   8d594ca (new_branch) modified README
+| |\  
+| | * 8711387 (origin/new_branch2, new_branch2) remove NewFile
+| | * e77263a add new file
+| |/  
+|/|   
+| * 7362e2d (origin/new_branch) modified README
+|/  
+* bd7b4ad (origin/main, origin/HEAD) Initial commit
+
